@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const getIPButton = document.getElementById('get-ip');
     const getUserAgentButton = document.getElementById('get-user-agent');
     const trackActionButton = document.getElementById('track-action');
-    const locationDataDiv = document.getElementById('location-data');
-    const ipDataDiv = document.getElementById('ip-data');
-    const userAgentDataDiv = document.getElementById('user-agent-data');
-    const usageDataDiv = document.getElementById('usage-data');
-    const browserDataDiv = document.getElementById('browser-data');
+    const dataDiv = document.getElementById('data');
 
     // Get Location
     getLocationButton.addEventListener('click', function () {
@@ -25,19 +21,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(data => {
                         if (data.results && data.results.length > 0) {
                             const address = data.results[0].formatted;
-                            locationDataDiv.innerHTML = `Location Address: ${address}`;
+                            dataDiv.innerHTML += `Location Address: ${address}<br>`;
                         } else {
-                            locationDataDiv.innerHTML = 'Unable to retrieve address for the provided coordinates.';
+                            dataDiv.innerHTML += 'Unable to retrieve address for the provided coordinates.<br>';
                         }
                     })
                     .catch(error => {
-                        locationDataDiv.innerHTML = `Error: ${error.message}`;
+                        dataDiv.innerHTML += `Error: ${error.message}<br>`;
                     });
             }, function (error) {
-                locationDataDiv.innerHTML = `Error: ${error.message}`;
+                dataDiv.innerHTML += `Error: ${error.message}<br>`;
             });
         } else {
-            locationDataDiv.innerHTML = 'Geolocation is not available in your browser.';
+            dataDiv.innerHTML += 'Geolocation is not available in your browser.<br>';
         }
     });
 
@@ -54,34 +50,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 const country = data.country;
                 const isp = data.org;
 
-                ipDataDiv.innerHTML = `
+                dataDiv.innerHTML += `
                     IP Address: ${ipAddress}<br>
                     Hostname: ${hostname}<br>
                     City: ${city}<br>
                     Region: ${region}<br>
                     Country: ${country}<br>
-                    ISP: ${isp}
+                    ISP: ${isp}<br>
                 `;
             })
             .catch(error => {
-                ipDataDiv.innerHTML = `Error: ${error.message}`;
+                dataDiv.innerHTML += `Error: ${error.message}<br>`;
             });
     });
 
     // Get User-Agent
     getUserAgentButton.addEventListener('click', function () {
         const userAgent = navigator.userAgent;
-        userAgentDataDiv.innerHTML = `User-Agent: ${userAgent}`;
+        dataDiv.innerHTML += `User-Agent: ${userAgent}<br>`;
     });
-
-    // Get Browser Data
-    const browserData = navigator.userAgent;
-    browserDataDiv.innerHTML = `Browser Data: ${browserData}`;
 
     // Track Action (a simple example of tracking a button click)
     let clickCount = 0;
     trackActionButton.addEventListener('click', function () {
         clickCount++;
-        usageDataDiv.innerHTML = `Button Clicks: ${clickCount}`;
+        dataDiv.innerHTML += `Button Clicks: ${clickCount}<br>`;
     });
 });
