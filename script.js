@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const deviceInfoDiv = document.getElementById('device-info');
     const dataDiv = document.getElementById('data');
     const mouseTrackerDiv = document.getElementById('mouse-tracker');
+    const keyboardTrackerDiv = document.getElementById('keyboard-tracker');
+    const browserDataDiv = document.getElementById('browser-data');
 
     // Get Location
     getLocationButton.addEventListener('click', function () {
@@ -76,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
         userAgentDataDiv.innerHTML = `User-Agent: ${userAgent}`;
     });
 
+    const browserData = navigator.userAgent;
+    browserDataDiv.innerHTML = `Browser Data: ${browserData}`;
+
     // Track Action (a simple example of tracking a button click)
     let clickCount = 0;
     trackActionButton.addEventListener('click', function () {
@@ -123,5 +128,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const mouseX = event.clientX;
         const mouseY = event.clientY;
         mouseTrackerDiv.innerHTML = `Mouse Position: X=${mouseX}, Y=${mouseY}`;
+    });
+
+    // Keyboard Tracker
+    window.addEventListener('keydown', function (event) {
+        const key = event.key;
+        keyboardTrackerDiv.innerHTML = `Key Pressed: ${key}`;
     });
 });
