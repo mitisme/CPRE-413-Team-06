@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const usageDataDiv = document.getElementById('usage-data');
     const deviceInfoDiv = document.getElementById('device-info');
     const dataDiv = document.getElementById('data');
+    const mouseTrackerDiv = document.getElementById('mouse-tracker');
 
     // Get Location
     getLocationButton.addEventListener('click', function () {
@@ -116,4 +117,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return 'N/A';
     }
+
+    // Mouse Tracker
+    document.addEventListener('mousemove', function (event) {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+        mouseTrackerDiv.innerHTML = `Mouse Position: X=${mouseX}, Y=${mouseY}`;
+    });
 });
