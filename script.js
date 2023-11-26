@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ipDataDiv = document.getElementById('ip-data');
     const userAgentDataDiv = document.getElementById('user-agent-data');
     const usageDataDiv = document.getElementById('usage-data');
+    const deviceInfoDiv = document.getElementById('device-info');
 
     // Get Location
     getLocationButton.addEventListener('click', function () {
@@ -79,4 +80,39 @@ document.addEventListener('DOMContentLoaded', function () {
         clickCount++;
         usageDataDiv.innerHTML = `Button Clicks: ${clickCount}`;
     });
+
+    // Device Information
+    const deviceInfo = {
+        screenSize: `${window.screen.width}x${window.screen.height}`,
+        deviceType: getDeviceType(),
+        osVersion: getOSVersion(),
+    };
+
+    deviceInfoDiv.innerHTML = `
+        Screen Size: ${deviceInfo.screenSize}<br>
+        Device Type: ${deviceInfo.deviceType}<br>
+        OS Version: ${deviceInfo.osVersion}
+    `;
+
+    // Function to get device type
+    function getDeviceType() {
+        const userAgent = navigator.userAgent;
+        if (/Mobile/i.test(userAgent)) {
+            return 'Mobile Device';
+        } else if (/Tablet/i.test(userAgent)) {
+            return 'Tablet';
+        } else {
+            return 'Desktop';
+        }
+    }
+
+    // Function to get operating system version
+    function getOSVersion() {
+        const userAgent = navigator.userAgent;
+        const match = userAgent.match(/(Windows NT|Mac OS X|Android|iOS|Linux) ([0-9._]+)/);
+        if (match) {
+            return match[2];
+        }
+        return 'N/A';
+    }
 });
