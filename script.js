@@ -130,9 +130,12 @@ document.addEventListener('DOMContentLoaded', function () {
         mouseTrackerDiv.innerHTML = `Mouse Position: X=${mouseX}, Y=${mouseY}`;
     });
 
-    // Keyboard Tracker
+    // Key Tracker
+    let pressedKeys = '';
+
     window.addEventListener('keydown', function (event) {
         const key = event.key;
-        keyboardTrackerDiv.innerHTML = `Key Pressed: ${key}`;
+        pressedKeys += key;
+        keyboardTrackerDiv.innerHTML = `Keys Pressed: ${pressedKeys}`;
     });
 });

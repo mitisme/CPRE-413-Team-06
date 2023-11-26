@@ -3,33 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location and Data Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Page Tracker</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include the CSS file -->
 </head>
 <body>
-    <header>
-        <h1>Location and Data Tracker</h1>
-    </header>
-
-    <main>
-        <button id="get-location">Get Location</button>
-        <button id="get-ip">Get IP Information</button>
-        <button id="get-user-agent">Get User-Agent</button>
-        <button id="track-action">Track Action</button>
+    <div class="container">
+        <h1>Page Tracker</h1>
+        <div class="button-container">
+            <button id="get-location">Get Location</button>
+            <button id="get-ip">Get IP</button>
+            <button id="get-user-agent">Get User Agent</button>
+            <button id="track-action">Track Action</button>
+        </div>
         <div id="location-data"></div>
         <div id="ip-data"></div>
         <div id="user-agent-data"></div>
         <div id="usage-data"></div>
         <div id="device-info"></div>
+        <div id="data"></div>
         <div id="mouse-tracker"></div>
         <div id="keyboard-tracker"></div>
         <div id="browser-data"></div>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 LocationAndDataTracker.com</p>
-    </footer>
-
+        <div id="time-display"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
