@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const getLocationButton = document.getElementById('get-location');
+    const getIPButton = document.getElementById('get-ip');
     const locationDataDiv = document.getElementById('location-data');
+    const ipDataDiv = document.getElementById('ip-data');
 
     getLocationButton.addEventListener('click', function () {
         if ('geolocation' in navigator) {
@@ -31,5 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             locationDataDiv.innerHTML = 'Geolocation is not available in your browser.';
         }
+    });
+
+    getIPButton.addEventListener('click', function () {
+        // Use a simple HTTP request to get the user's IP address from an IP lookup service
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                const ipAddress = data.ip;
+                ipDataDiv.innerHTML = `Your IP Address: ${ipAddress}`;
+            })
+            .catch(error => {
+                ipDataDiv.innerHTML = `Error: ${error.message}`;
+            });
     });
 });
