@@ -1,9 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const getLocationButton = document.getElementById('get-location');
     const getIPButton = document.getElementById('get-ip');
+    const getUserAgentButton = document.getElementById('get-user-agent');
+    const trackActionButton = document.getElementById('track-action');
     const locationDataDiv = document.getElementById('location-data');
     const ipDataDiv = document.getElementById('ip-data');
+    const userAgentDataDiv = document.getElementById('user-agent-data');
+    const usageDataDiv = document.getElementById('usage-data');
 
+    // Get Location
     getLocationButton.addEventListener('click', function () {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -35,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Get IP Information
     getIPButton.addEventListener('click', function () {
         // Use the IPinfo API to get more information about the user's IP address
         fetch('https://ipinfo.io/json')
@@ -59,5 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 ipDataDiv.innerHTML = `Error: ${error.message}`;
             });
+    });
+
+    // Get User-Agent
+    getUserAgentButton.addEventListener('click', function () {
+        const userAgent = navigator.userAgent;
+        userAgentDataDiv.innerHTML = `User-Agent: ${userAgent}`;
+    });
+
+    // Track Action (a simple example of tracking a button click)
+    let clickCount = 0;
+    trackActionButton.addEventListener('click', function () {
+        clickCount++;
+        usageDataDiv.innerHTML = `Button Clicks: ${clickCount}`;
     });
 });
