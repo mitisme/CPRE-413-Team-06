@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ipDataDiv = document.getElementById('ip-data');
     const userAgentDataDiv = document.getElementById('user-agent-data');
     const usageDataDiv = document.getElementById('usage-data');
+    const browserDataDiv = document.getElementById('browser-data');
 
     // Get Location
     getLocationButton.addEventListener('click', function () {
@@ -72,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const userAgent = navigator.userAgent;
         userAgentDataDiv.innerHTML = `User-Agent: ${userAgent}`;
     });
+
+    // Get Browser Data
+    const browserData = navigator.userAgent;
+    browserDataDiv.innerHTML = `Browser Data: ${browserData}`;
 
     // Track Action (a simple example of tracking a button click)
     let clickCount = 0;
