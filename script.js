@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const getIPButton = document.getElementById('get-ip');
     const getUserAgentButton = document.getElementById('get-user-agent');
     const trackActionButton = document.getElementById('track-action');
+    const locationDataDiv = document.getElementById('location-data');
+    const ipDataDiv = document.getElementById('ip-data');
+    const userAgentDataDiv = document.getElementById('user-agent-data');
+    const usageDataDiv = document.getElementById('usage-data');
+    const deviceInfoDiv = document.getElementById('device-info');
     const dataDiv = document.getElementById('data');
 
     // Get Location
@@ -21,19 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(data => {
                         if (data.results && data.results.length > 0) {
                             const address = data.results[0].formatted;
-                            dataDiv.innerHTML += `Location Address: ${address}<br>`;
+                            locationDataDiv.innerHTML = `Location Address: ${address}`;
                         } else {
-                            dataDiv.innerHTML += 'Unable to retrieve address for the provided coordinates.<br>';
+                            locationDataDiv.innerHTML = 'Unable to retrieve address for the provided coordinates.';
                         }
                     })
                     .catch(error => {
-                        dataDiv.innerHTML += `Error: ${error.message}<br>`;
+                        locationDataDiv.innerHTML = `Error: ${error.message}`;
                     });
             }, function (error) {
-                dataDiv.innerHTML += `Error: ${error.message}<br>`;
+                locationDataDiv.innerHTML = `Error: ${error.message}`;
             });
         } else {
-            dataDiv.innerHTML += 'Geolocation is not available in your browser.<br>';
+            locationDataDiv.innerHTML = 'Geolocation is not available in your browser.';
         }
     });
 
@@ -50,30 +55,65 @@ document.addEventListener('DOMContentLoaded', function () {
                 const country = data.country;
                 const isp = data.org;
 
-                dataDiv.innerHTML += `
+                ipDataDiv.innerHTML = `
                     IP Address: ${ipAddress}<br>
                     Hostname: ${hostname}<br>
                     City: ${city}<br>
                     Region: ${region}<br>
                     Country: ${country}<br>
-                    ISP: ${isp}<br>
+                    ISP: ${isp}
                 `;
             })
             .catch(error => {
-                dataDiv.innerHTML += `Error: ${error.message}<br>`;
+                ipDataDiv.innerHTML = `Error: ${error.message}`;
             });
     });
 
     // Get User-Agent
     getUserAgentButton.addEventListener('click', function () {
         const userAgent = navigator.userAgent;
-        dataDiv.innerHTML += `User-Agent: ${userAgent}<br>`;
+        userAgentDataDiv.innerHTML = `User-Agent: ${userAgent}`;
     });
 
     // Track Action (a simple example of tracking a button click)
     let clickCount = 0;
     trackActionButton.addEventListener('click', function () {
         clickCount++;
-        dataDiv.innerHTML += `Button Clicks: ${clickCount}<br>`;
+        usageDataDiv.innerHTML = `Button Clicks: ${clickCount}`;
     });
+
+    // Device Information
+    const deviceInfo = {
+        screenSize: `${window.screen.width}x${window.screen.height}`,
+        deviceType: getDeviceType(),
+        osVersion: getOSVersion(),
+    };
+
+    deviceInfoDiv.innerHTML = `
+        Screen Size: ${deviceInfo.screenSize}<br>
+        Device Type: ${deviceInfo.deviceType}<br>
+        OS Version: ${deviceInfo.osVersion}
+    `;
+
+    // Function to get device type
+    function getDeviceType() {
+        const userAgent = navigator.userAgent;
+        if (/Mobile/i.test(userAgent)) {
+            return 'Mobile Device';
+        } else if (/Tablet/i.test(userAgent)) {
+            return 'Tablet';
+        } else {
+            return 'Desktop';
+        }
+    }
+
+    // Function to get operating system version
+    function getOSVersion() {
+        const userAgent = navigator.userAgent;
+        const match = userAgent.match(/(Windows NT|Mac OS X|Android|iOS|Linux) ([0-9._]+)/);
+        if (match) {
+            return match[2];
+        }
+        return 'N/A';
+    }
 });
